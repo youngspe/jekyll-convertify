@@ -1,0 +1,32 @@
+{% convertify from .mty to .html %}
+<! Here we use convertify to convert this layout to HTML !>
+html {
+head {
+  style>'''
+  {% convertify from .sass to .css %}
+  p
+    font-family: monospace
+    color: red
+
+  {% endconvertify %}
+
+  {% convertify_include sass_include.sass as .css %}
+  '''
+}
+header {
+  {{ site.title }}
+}
+
+main {
+  article {
+    h1> {{ page.title | mintyml_escape }}
+
+    <[raw[ {{ content }} ]]>
+  }
+}
+
+footer {
+  Site footer
+}
+}
+{% endconvertify %}
