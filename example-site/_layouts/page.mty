@@ -2,19 +2,20 @@
 <! Here we use convertify to convert this layout to HTML !>
 html {
 head {
+  title> {{ page.title | mintyml_escape }} | {{ site.title | mintyml_escape }}
   style>'''
   {% convertify from .sass to .css %}
   p
     font-family: monospace
-    color: red
+    color: #102030
 
   {% endconvertify %}
 
-  {% convertify_include sass_include.sass as .css %}
+  {% convertify_include sass_include2.sass as .css %}
   '''
 }
 header {
-  {{ site.title }}
+  <(a[href="{{ site.url }}"]> {{ site.title | mintyml_escape  }})>
 }
 
 main {
@@ -26,7 +27,12 @@ main {
 }
 
 footer {
-  Site footer
+  ul.site-links {
+    >a[href="{{ "/pages/my_page1" | relative_url }}"]> my_page1
+    >a[href="{{ "/pages/my_page2" | relative_url }}"]> my_page2
+    >a[href="{{ "/pages/my_page3" | relative_url }}"]> my_page3
+    >a[href="{{ "/pages/my_page4" | relative_url }}"]> my_page4
+  }
 }
 }
 {% endconvertify %}

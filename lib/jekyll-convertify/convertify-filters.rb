@@ -3,3 +3,5 @@ module Jekyll; module ConvertifyFilters
     Convertify.convert(@context, lambda { input }, source_extension, destination_extension)
   end
 end; end
+
+Liquid::Template.register_filter(Jekyll::ConvertifyFilters)

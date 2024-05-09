@@ -1,5 +1,3 @@
 == AsciiDoc section
 
 This is the *AsciiDoc section*
-
-{{page.title}}

@@ -1,0 +1,16 @@
+---
+layout: page
+title: my_page1
+---
+
+<style>
+{% convertify from .sass to .css %}
+p
+  font-family: sans-serif
+  color: #803010
+{% endconvertify %}
+</style>
+
+{% convertify from .md %}
+This is some page content.
+{% endconvertify %}

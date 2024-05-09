@@ -2,13 +2,13 @@
 title: Hello, world!
 layout: page
 ---
-{% convertify from .md %}
+{{ "
 ## Markdown section
 
 This is the _Markdown_ section.
-{% endconvertify %}
+" | convertify: ".md", ".html" }}
 
-{% convertify from .mty %}
+{% convertify from mty %}
 h2> MinTyML section
 
 This is the <_MinTyML_> section.
