@@ -45,12 +45,11 @@ module Convertify; module ConvertHelper
 
   def self.find_converter(context, src_ext, dst_ext)
     site = context.registers[:site]
-    if src_ext == dst_ext
-      return ConverterResult.new(
-               converter: site.find_converter_instance(Jekyll::Converters::Identity),
-               destination_extension: dst_ext,
-             ) if src_ext == dst_ext
-    end
+    return ConverterResult.new(
+             converter: site.find_converter_instance(Jekyll::Converters::Identity),
+             destination_extension: dst_ext,
+           ) if src_ext == dst_ext
+
     query = ConverterQuery.new(
       source_extension: src_ext,
       destination_extension: dst_ext,
@@ -92,12 +91,15 @@ module Convertify
     result = ConvertHelper::find_converter(context, source_extension, inferred_dst_ext)
 
     if result.nil?
-      raise Liquid::ArgumentError,
-            "No converter available for '#{source_extension}'"
-    elsif destination_extension && result.destination_extension != destination_extension
-      raise Liquid::ArgumentError,
-            "No converter available for '#{source_extension}' to '#{destination_extension}'"
+      raise ArgumentError, "No converter available for '#{source_extension}'"
+      return render.call
     end
+
+    if destination_extension && result.destination_extension != destination_extension
+      raise ArgumentError, "No converter available for '#{source_extension}' to '#{destination_extension}'"
+      return render.call
+    end
+
     result.converter.convert(context.stack do
       context["convertify_extension"] = source_extension
       render.call
