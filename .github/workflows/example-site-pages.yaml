@@ -37,6 +37,7 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
       - name: Build with Jekyll
+        working-directory: example-site
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_url }}"
         env:
           JEKYLL_ENV: production
