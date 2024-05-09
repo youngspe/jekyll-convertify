@@ -38,7 +38,9 @@ jobs:
           cache-version: 0 # Increment this number if you need to re-download cached gems
       - name: Build with Jekyll
         working-directory: example-site
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_url }}"
+        run: |
+          bundle install
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_url }}"
         env:
           JEKYLL_ENV: production
       - name: Upload artifact
